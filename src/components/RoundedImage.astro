@@ -1,0 +1,21 @@
+
+---
+export interface Props {
+  src: string;
+  alt?: string; 
+  size?: string;
+}
+
+const size = Astro.props.size || '100px';
+const alt = Astro.props.alt || "Imagen";
+const src = Astro.props.src;
+---
+<div
+  class="rounded-full border-4 border-slate-300 overflow-hidden"
+  style={{
+    width: size,
+    height: size,
+  }}
+>
+  <img src={src} alt={alt} class="w-full h-full object-cover" />
+</div>

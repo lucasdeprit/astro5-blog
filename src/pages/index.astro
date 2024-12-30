@@ -1,11 +1,46 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import RoundedImage from '../components/RoundedImage.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const blogs = await getCollection('blogs');
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="El Blog de Lucas Deprit">
+	<main>
+		<div class="flex flex-row gap-4 items-center">
+			<RoundedImage src="/images/profile_picture.jpeg" alt="Avatar de usuario" size="90px" />
+			<h1 class="leading-normal text-3xl font-extrabold">[Lucas Deprit] 
+				<span class="block">
+					&#128104;&#8205;&#128187;
+					Blog
+				</span>
+			</h1>
+		</div>
+	</main>
+
+	<section aria-label="Blog posts">
+		<div class="px-4 pt-4 mx-auto max-w-screen-xl">
+			<div class="grid gap-6 md:grid-cols-2">
+				{
+				blogs.map(blog => {
+					const {slug, data} = blog
+					const {title, author, readtime, description, date} = data
+					return (
+						<article class="flex flex-col gap-1.5">
+							<div class="flex flex-col gap-0 leading-tight">
+								<h2 class="text-2xl font-bold">{title}</h2>
+								<h3 class="text-sm text-slate-500"> Autor: {author} - {date}</h3>
+							</div>
+							<div class="flex flex-col gap-1.5 mb-2">
+								<p class="max-w-sm"> {description}</p>
+								<span class="text-xs text-slate-500"> &#x23F3; Lectura en {readtime} minutos</span>
+							</div>
+						</article>
+					)
+				})
+				}
+			</div>
+		</div>
+	</section>
 </Layout>
