@@ -3,35 +3,42 @@ import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
-	const blogs = await getCollection('blogs')
+  const blogs = await getCollection("blogs");
 
-	return blogs.map((blog)=> ({
-		params: { id: blog.slug },
-		props: { blog }
-	}))
+  return blogs.map((blog) => ({
+    params: { id: blog.slug },
+    props: { blog },
+  }));
 }
 
-const { blog } = Astro.props
-const { data, slug } = blog
-const { title, author, readtime, date } = data
+const { blog } = Astro.props;
+const { data, slug } = blog;
+const { title, author, readtime, date } = data;
 
-const { Content } = await render(blog)
+const { Content } = await render(blog);
 ---
 
 <Layout title={`${title} - Blog`}>
-	<a href="/" class="hover:underline hover:text-slate-500 opacity-80"> ← volver atrás </a>
-	<main class="flex flex-col items-start justify-start min-h-screen">
-		<div class="flex flex-col gap-0 leading-tight mt-4 mb-4">
-			<h2 class="text-4xl font-bold" transition:name=`${slug}`>{title}</h2>
-			<h3 class="text-xl text-slate-500 "> Autor: {author} - {date.toLocaleDateString()} - &#x23F3; Lectura en {readtime} minutos</h3>
-			<h3 class="text-xl text-slate-500"></h3>
-		</div>
-		<div class="prose dark:prose-invert
+  <a href="/" class="hover:underline hover:text-slate-500 opacity-80">
+    ← volver atrás
+  </a>
+  <main class="flex flex-col items-start justify-start min-h-screen">
+    <div class="flex flex-col gap-0 leading-tight mt-4 mb-4">
+      <h2 class="text-4xl font-bold" transition:name=`${slug}`>{title}</h2>
+      <h3 class="text-xl text-slate-500">
+        Autor: {author} - {date.toLocaleDateString()} - &#x23F3; Lectura en {
+          readtime
+        } minutos
+      </h3>
+      <h3 class="text-xl text-slate-500"></h3>
+    </div>
+    <div
+      class="prose dark:prose-invert
 			prose:text-slate-200
 			prose-h1:font-bold prose-h1:text-xl
-			prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
-			">
-			<Content class="blog-content" />
-		</div>	
-	</main>
+			prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
+    >
+      <Content class="blog-content" />
+    </div>
+  </main>
 </Layout>
