@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+	const blogs = await getCollection('blogs')
+
+	return blogs.map((blog)=> ({
+		params: { id: blog.slug },
+		props: { blog }
+	}))
+}
+
+const { blog } = Astro.props
+const { data, slug } = blog
+const { title, author, description, readtime, date } = data
+
+const { Content } = await render(blog)
+---
+
+<Layout title={`${title} - Blog`}>
+	<main class="">
+		<a href="/" class="hover:underline opacity-80"> ← volver atrás </a>
+		<div class="flex flex-col gap-0 leading-tight" transition:name=`${slug}`>
+			<h2 class="text-4xl font-bold" >{title}</h2>
+			<h3 class="text-xl text-slate-500"> Autor: {author} - {date}</h3>
+		</div>
+		<div class="">
+			<Content />
+		</div>
+	</main>
+</Layout>
