@@ -20,10 +20,10 @@ const { Content } = await render(blog)
 
 <Layout title={`${title} - Blog`}>
 	<a href="/" class="hover:underline hover:text-slate-500 opacity-80"> ← volver atrás </a>
-	<main class="mb-32 flex flex-col items-start justify-start min-h-screen">
+	<main class="flex flex-col items-start justify-start min-h-screen">
 		<div class="flex flex-col gap-0 leading-tight mt-4 mb-4">
 			<h2 class="text-4xl font-bold" transition:name=`${slug}`>{title}</h2>
-			<h3 class="text-xl text-slate-500"> Autor: {author} - {date.toLocaleDateString()} - &#x23F3; Lectura en {readtime} minutos</h3>
+			<h3 class="text-xl text-slate-500 "> Autor: {author} - {date.toLocaleDateString()} - &#x23F3; Lectura en {readtime} minutos</h3>
 			<h3 class="text-xl text-slate-500"></h3>
 		</div>
 		<div class="prose dark:prose-invert
