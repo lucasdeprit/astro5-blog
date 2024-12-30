@@ -2,7 +2,7 @@
 title: Primer Blog
 author: yo!
 readtime: 5
-date: 30-12-2024
+date: 12-12-2024
 description: Mi primer blog aprendiendo rust
 ---
 

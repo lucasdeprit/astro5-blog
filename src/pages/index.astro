@@ -23,7 +23,15 @@ const blogs = await getCollection('blogs');
 		<div class="px-4 pt-4 mx-auto max-w-screen-xl">
 			<div class="grid gap-6 md:grid-cols-1">
 				{
-				blogs.map(blog => {
+				blogs
+				.slice(0, 5)
+				.sort((a, b) => {
+					const dateA = new Date(a.data.date).getTime();
+					const dateB = new Date(b.data.date).getTime();
+
+					return dateB - dateA;
+})
+				.map(blog => {
 					const {slug, data} = blog
 					const {title, author, readtime, description, date} = data
 					return (
@@ -31,7 +39,7 @@ const blogs = await getCollection('blogs');
 							<a href={`/blog/${slug}`}>
 								<div class="flex flex-col gap-0 leading-tight" transition:name=`${slug}`>
 							<h2 class="text-xl font-bold" >{title}</h2>
-									<h3 class="text-sm text-slate-500"> Autor: {author} - {date}</h3>
+									<h3 class="text-sm text-slate-500"> Autor: {author} - {date.toLocaleDateString()}</h3>
 								</div>
 							</a>
 							<div class="flex flex-col gap-1.5 mb-2">
