@@ -6,8 +6,6 @@ date: 12-12-2024
 description: Mi primer blog aprendiendo rust
 ---
 
-# Mi Primer Blog: Aprendiendo Rust
-
 ¡Hola a todos!  
 
 Soy un desarrollador de software que tuvo la suerte de estudiar ingeniería informática y, desde hace ya tres años, me dedico principalmente al desarrollo de aplicaciones móviles en **Swift**. Ha sido un camino increíble, lleno de desafíos y aprendizajes, que me ha permitido crear experiencias que llevan valor y creatividad a los usuarios finales.  

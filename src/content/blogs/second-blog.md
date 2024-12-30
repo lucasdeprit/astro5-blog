@@ -6,8 +6,6 @@ date: 30-12-2024
 description: Mis primeros pasos en Rust
 ---
 
-# Mis Primeros Días con Rust
-
 ¡Hola a todos!  
 
 Como mencioné anteriormente, soy un desarrollador móvil con varios años de experiencia trabajando principalmente con **Swift**. Sin embargo, recientemente decidí aventurarme fuera de mi zona de confort para explorar un lenguaje completamente diferente: **Rust**.  

@@ -11,7 +11,7 @@ const blogs = await getCollection('blogs');
 		<div class="flex flex-row gap-4 items-center">
 			<RoundedImage src="/images/profile_picture.jpeg" alt="Avatar de usuario" size="90px" />
 			<h1 class="leading-normal text-3xl font-extrabold">[Lucas Deprit] 
-				<span class="block">
+				<span class="block sm:inline">
 					&#128104;&#8205;&#128187;
 					Blog
 				</span>
@@ -20,7 +20,8 @@ const blogs = await getCollection('blogs');
 	</main>
 
 	<section aria-label="Blog posts">
-		<div class="px-4 pt-4 mx-auto max-w-screen-xl">
+		<h1 class="text-2xl font-bold mb-4 mt-12" >Mis últimos blogs:</h1>
+		<div class="px-4 mx-auto max-w-screen-xl">
 			<div class="grid gap-6 md:grid-cols-1">
 				{
 				blogs
@@ -37,8 +38,8 @@ const blogs = await getCollection('blogs');
 					return (
 						<article class="flex flex-col gap-1.5">
 							<a href={`/blog/${slug}`}>
-								<div class="flex flex-col gap-0 leading-tight" transition:name=`${slug}`>
-							<h2 class="text-xl font-bold" >{title}</h2>
+								<div class="flex flex-col gap-0 leading-tight">
+							<h2 class="text-xl font-bold hover:underline hover:text-slate-500" transition:name=`${slug}`>{title}</h2>
 									<h3 class="text-sm text-slate-500"> Autor: {author} - {date.toLocaleDateString()}</h3>
 								</div>
 							</a>
