@@ -3,9 +3,13 @@
 import Layout from "../layouts/Layout.astro";
 import RoundedImage from "../components/RoundedImage.astro";
 import ActionIcons from "../components/ActionIcons.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 
 const blogs = await getCollection("blogs");
+
+const introCollection = await getCollection("intro");
+const intro = introCollection[0]; // Obtén el primer archivo de la colección
+const { Content } = await render(intro);
 ---
 
 <Layout title="El Blog de Lucas Deprit">
@@ -28,6 +32,18 @@ const blogs = await getCollection("blogs");
     </div>
 
     <section aria-label="Blog posts">
+      <h2 class="text-2xl font-bold mb-4 mt-12">Introducción:</h2>
+      <div class="max-w-screen-xl">
+        <div
+          class="prose dark:prose-invert
+			prose:text-slate-200
+			prose-h1:font-bold prose-h1:text-xl
+          prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
+          prose-img:mt-0 prose-img:pt-0 prose-img:mb-0 prose-img:pb-0"
+        >
+          <Content />
+        </div>
+      </div>
       <h2 class="text-2xl font-bold mb-4 mt-12">Mis últimos blogs:</h2>
       <div class="px-4 mx-auto max-w-screen-xl">
         <div class="grid gap-6 md:grid-cols-1">

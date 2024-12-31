@@ -23,4 +23,6 @@ const blogs = defineCollection({
   }),
 });
 
-export const collections = { blogs };
+const intro = defineCollection({});
+
+export const collections = { blogs, intro };
