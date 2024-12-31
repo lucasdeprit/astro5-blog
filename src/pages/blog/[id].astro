@@ -16,10 +16,13 @@ const { data, slug } = blog;
 const { title, author, readtime, date } = data;
 
 const { Content } = await render(blog);
+
+const from = Astro.url.searchParams.get("from") || "home"; // Por defecto, "home"
+const backLink = from === "blogs" ? "/blogs" : "/";
 ---
 
 <Layout title={`${title} - Blog`}>
-  <a href="/" class="hover:underline hover:text-slate-500 opacity-80">
+  <a href={backLink} class="hover:underline hover:text-slate-500 opacity-80">
     ← volver atrás
   </a>
   <main class="flex flex-col items-start justify-start min-h-screen">
