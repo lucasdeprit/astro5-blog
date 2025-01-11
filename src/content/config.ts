@@ -20,6 +20,7 @@ const blogs = defineCollection({
       ),
     ),
     description: z.string(),
+    finished: z.boolean(),
   }),
 });
 
