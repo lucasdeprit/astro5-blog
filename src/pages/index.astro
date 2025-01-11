@@ -67,7 +67,8 @@ const { Content } = await render(intro);
               })
               .map((blog) => {
                 const { slug, data } = blog;
-                const { title, author, readtime, description, date } = data;
+                const { title, author, readtime, description, date, finished } =
+                  data;
                 return (
                   <article class="flex flex-col gap-1.5">
                     <a href={`/blog/${slug}`}>
@@ -77,6 +78,7 @@ const { Content } = await render(intro);
                         </h2>
                         <h3 class="text-sm text-slate-500">
                           Autor: {author} - {date.toLocaleDateString()}
+                          {!finished ? <span>⚠️ WIP</span> : <p />}
                         </h3>
                       </div>
                     </a>
