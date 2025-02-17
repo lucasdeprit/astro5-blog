@@ -1,21 +1,19 @@
 ---
-// Blog.astro
 import Layout from "../layouts/Layout.astro";
 import RoundedImage from "../components/RoundedImage.astro";
 import ActionIcons from "../components/ActionIcons.astro";
 import { getCollection, render } from "astro:content";
 
 const blogs = await getCollection("blogs");
-
 const introCollection = await getCollection("intro");
-const intro = introCollection[0]; // Obtén el primer archivo de la colección
+const intro = introCollection[0];
 const { Content } = await render(intro);
 ---
 
 <Layout title="El Blog de Lucas Deprit">
-  <main class="main-content">
-    <div
-      class="flex flex-col gap-4 md:flex-row md:justify-between items-center"
+  <main class="main-content max-w-3xl mx-auto px-6 py-10">
+    <header
+      class="flex flex-col gap-4 md:flex-row md:justify-between items-center mb-10"
     >
       <div class="flex items-center gap-4">
         <RoundedImage
@@ -23,77 +21,70 @@ const { Content } = await render(intro);
           alt="Avatar de usuario"
           size="90px"
         />
-        <h1 class="leading-normal text-3xl font-extrabold">
-          [Lucas Deprit]
-          <span class="block">
-            <div class="flex flex-row gap-4 items-center">
-              &#128104;&#8205;&#128187; Blog
-              <ActionIcons />
-            </div>
+        <h1 class="text-3xl font-extrabold">
+          Lucas Deprit
+          <span class="flex flex-row gap-4 items-center text-lg text-gray-600">
+            👨‍💻 Blog <ActionIcons />
           </span>
         </h1>
       </div>
       <a
         href="/blogs"
-        class="hover:underline hover:text-slate-500 font-bold text-xl md:text-base"
+        class="px-5 py-2 border-2 border-white text-white font-bold rounded-lg hover:bg-white hover:text-black transition-all"
       >
-        [MIS BLOGS]
+        MIS BLOGS
       </a>
-    </div>
+    </header>
 
-    <section aria-label="Blog posts">
-      <h2 class="text-2xl font-bold mb-4 mt-12">Introducción:</h2>
-      <div class="max-w-screen-xl">
-        <div
-          class="prose dark:prose-invert
+    <section>
+      <h2 class="text-2xl font-bold mb-6">Introducción:</h2>
+      <article
+        class="prose dark:prose-invert
 			prose:text-slate-200
 			prose-h1:font-bold prose-h1:text-xl
           prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
           prose-img:mt-0 prose-img:pt-0 prose-img:mb-0 prose-img:pb-0"
-        >
-          <Content />
-        </div>
-      </div>
-      <h2 class="text-2xl font-bold mb-4 mt-12">Mis últimos blogs:</h2>
-      <div class="px-4 mx-auto max-w-screen-xl">
-        <div class="grid gap-6 md:grid-cols-1">
-          {
-            blogs
-              .slice(0, 5)
-              .sort((a, b) => {
-                const dateA = new Date(a.data.date).getTime();
-                const dateB = new Date(b.data.date).getTime();
-                return dateB - dateA;
-              })
-              .map((blog) => {
-                const { slug, data } = blog;
-                const { title, author, readtime, description, date, finished } =
-                  data;
-                return (
-                  <article class="flex flex-col gap-1.5">
-                    <a href={`/blog/${slug}`}>
-                      <div class="flex flex-col gap-0 leading-tight">
-                        <h2 class="text-xl font-bold hover:underline hover:text-gray-500">
-                          {title}
-                        </h2>
-                        <h3 class="text-sm text-slate-500">
-                          Autor: {author} - {date.toLocaleDateString()}
-                          {!finished ? <span>⚠️ WIP</span> : <p />}
-                        </h3>
-                      </div>
-                    </a>
-                    <div class="flex flex-col gap-1.5 mb-2">
-                      <p class="max-w-sm">{description}</p>
-                      <span class="text-xs text-slate-500">
-                        {" "}
-                        &#x23F3; Lectura en {readtime} minutos
-                      </span>
-                    </div>
-                  </article>
-                );
-              })
-          }
-        </div>
+      >
+        <Content />
+      </article>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold mb-6">Mis últimos blogs:</h2>
+      <div class="grid gap-6">
+        {
+          blogs
+            .slice(0, 5)
+            .sort(
+              (a, b) =>
+                new Date(b.data.date).getTime() -
+                new Date(a.data.date).getTime(),
+            )
+            .map((blog) => {
+              const { slug, data } = blog;
+              const { title, author, readtime, description, date, finished } =
+                data;
+              return (
+                <article class="flex flex-col gap-2 p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-900">
+                  <a href={`/blog/${slug}`} class="hover:underline">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">
+                      {title}
+                    </h3>
+                  </a>
+                  <p class="text-sm text-gray-700 dark:text-gray-300">
+                    Autor: {author} · {new Date(date).toLocaleDateString()}
+                  </p>
+                  {!finished && (
+                    <span class="text-yellow-600 font-semibold">⚠️ WIP</span>
+                  )}
+                  <p class="text-gray-800 dark:text-gray-200">{description}</p>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">
+                    ⏳ Lectura en {readtime} minutos
+                  </span>
+                </article>
+              );
+            })
+        }
       </div>
     </section>
   </main>

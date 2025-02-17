@@ -6,8 +6,11 @@ const blogs = await getCollection("blogs");
 ---
 
 <Layout title="Mis blogs">
-  <a href="/" class="hover:underline hover:text-slate-500 opacity-80">
-    ← volver atrás
+  <a
+    href="/"
+    class="text-white opacity-80 hover:underline hover:text-gray-300 self-start"
+  >
+    ← Volver Atrás
   </a>
   <div class="main-content">
     <h1 class="leading-normal text-3xl font-extrabold pb-4">
@@ -24,29 +27,25 @@ const blogs = await getCollection("blogs");
             })
             .map((blog) => {
               const { slug, data } = blog;
-              const { title, author, readtime, description, date } = data;
+              const { title, author, readtime, description, date, finished } =
+                data;
               return (
-                <article class="flex flex-col gap-1.5">
-                  <a href={`/blog/${slug}`}>
-                    <div class="flex flex-col gap-0 leading-tight">
-                      <h2
-                        class="text-xl font-bold hover:underline hover:text-gray-500"
-                        transition:name={`${slug}`}
-                      >
-                        {title}
-                      </h2>
-                      <h3 class="text-sm text-slate-500">
-                        Autor: {author} - {date.toLocaleDateString()}
-                      </h3>
-                    </div>
+                <article class="flex flex-col gap-2 p-4 border rounded-lg shadow-sm bg-white dark:bg-gray-900">
+                  <a href={`/blog/${slug}`} class="hover:underline">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">
+                      {title}
+                    </h3>
                   </a>
-                  <div class="flex flex-col gap-1.5 mb-2">
-                    <p class="max-w-sm">{description}</p>
-                    <span class="text-xs text-slate-500">
-                      {" "}
-                      &#x23F3; Lectura en {readtime} minutos
-                    </span>
-                  </div>
+                  <p class="text-sm text-gray-700 dark:text-gray-300">
+                    Autor: {author} · {new Date(date).toLocaleDateString()}
+                  </p>
+                  {!finished && (
+                    <span class="text-yellow-600 font-semibold">⚠️ WIP</span>
+                  )}
+                  <p class="text-gray-800 dark:text-gray-200">{description}</p>
+                  <span class="text-xs text-gray-600 dark:text-gray-400">
+                    ⏳ Lectura en {readtime} minutos
+                  </span>
                 </article>
               );
             })
