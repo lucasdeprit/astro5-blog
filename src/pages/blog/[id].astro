@@ -14,44 +14,44 @@ export async function getStaticPaths() {
 const { blog } = Astro.props;
 const { data, slug } = blog;
 const { title, author, readtime, date, finished } = data;
-
 const { Content } = await render(blog);
 
-const from = Astro.url.searchParams.get("from") || "home"; // Por defecto, "home"
+const from = Astro.url.searchParams.get("from") || "home";
 const backLink = from === "blogs" ? "/blogs" : "/";
 ---
 
 <Layout title={`${title} - Blog`}>
-  <a href={backLink} class="hover:underline hover:text-slate-500 opacity-80">
-    ← volver atrás
+  <a
+    href={backLink}
+    class="hover:underline text-slate-500 opacity-80 flex items-center gap-2"
+  >
+    ← Volver atrás
   </a>
-  <main class="flex flex-col items-start justify-start min-h-screen">
-    <div class="flex flex-col gap-0 leading-tight mt-4 mb-4">
-      <h2 class="text-4xl font-bold" transition:name={`${slug}`}>{title}</h2>
-      <h3 class="text-l text-slate-500">
-        Autor: {author} - {date.toLocaleDateString()} - &#x23F3; Lectura en {
-          readtime
-        } minutos
-      </h3>
-      {
-        !finished ? (
-          <h3 class="text-l text-slate-300 pt-4 pb-4 font-bold">
-            <span>⚠️</span>
-            WIP: Todavía no esta terminado el blog
-          </h3>
-        ) : (
-          <p />
-        )
-      }
-      <h3 class="text-xl text-slate-500"></h3>
-    </div>
-    <div
-      class="prose dark:prose-invert
-			prose:text-slate-200
-			prose-h1:font-bold prose-h1:text-xl
-			prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl prose-img:mt-0"
+
+  <main
+    class="flex flex-col items-start justify-start min-h-screen max-w-3xl mx-auto px-6 py-10"
+  >
+    <header class="mb-6">
+      <h1 class="text-4xl font-bold">{title}</h1>
+      <p class="text-slate-500 mt-2">
+        Autor: <span class="font-semibold">{author}</span> · {
+          date.toLocaleDateString()
+        } · ⏳ {readtime} min de lectura
+      </p>
+    </header>
+
+    {
+      !finished && (
+        <div class="bg-yellow-100 text-yellow-800 p-4 rounded-lg mb-6">
+          <strong>⚠️ WIP:</strong> Este blog aún está en desarrollo.
+        </div>
+      )
+    }
+
+    <article
+      class="prose dark:prose-invert prose-h1:font-bold prose-h1:text-2xl prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl"
     >
-      <Content class="blog-content" />
-    </div>
+      <Content />
+    </article>
   </main>
 </Layout>
