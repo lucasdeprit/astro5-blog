@@ -3,20 +3,21 @@ title: "Bienvenido a mi blog"
 ---
 
 ## ¡Hola! 👋  
-Soy **Lucas**, un programador frontend con *3 años de experiencia* en programación móvil.  
 
-Este blog no trata sobre mí, sino sobre **todo lo que iré aprendiendo en mi tiempo libre durante 2025**.  
+Soy **Lucas**, un desarrollador de software con *tres años de experiencia* en desarrollo móvil.  
 
-#### 🎯 **Objetivo actual:** Aprender **Rust**.  
+Este blog nace con la intención de compartir conocimientos sobre tecnologías relevantes como:
+- Nuevas tendencias en desarrollo.
+- Actualizaciones sobre **Swift** y otros lenguajes.
+- Curiosidades tecnológicas.
 
-Además, iré publicando sobre cualquier tecnología que me parezca interesante. Desde programación hasta curiosidades del mundo tech.  
+#### 🎯 **Objetivo actual:** Aprender e Interiorizar tecnologías tanto nuevas como las que uso actualmente.
 
-> 💡 *Quédate si te apetece explorar más conmigo.* 🚀
+Me interesa seguir aprendiendo y profundizando en distintas áreas del desarrollo, por lo que aquí encontrarás publicaciones sobre herramientas, frameworks y conceptos que considero valiosos.  
 
 <div style="display: flex; gap: 8px; align-items: center; padding: 0px 0;">
   <img src="https://img.shields.io/badge/-Flutter-02569B?logo=flutter&logoColor=white&style=flat-square" alt="Flutter" style="height: 24px;" />
   <img src="https://img.shields.io/badge/-Swift-FA7343?logo=swift&logoColor=white&style=flat-square" alt="Swift" style="height: 24px;" />
-  <img src="https://img.shields.io/badge/-Rust-000000?logo=rust&logoColor=white&style=flat-square" alt="Rust" style="height: 26px;" />
   <img src="https://img.shields.io/badge/-Astro-FF5D01?logo=astro&logoColor=white&style=flat-square" alt="Astro" style="height: 24px;" />
 </div>
 
