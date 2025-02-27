@@ -8,5 +8,5 @@ export default defineConfig({
   integrations: [tailwind()],
   site: 'https://lucasdeprit.github.io',
   base: '/astro5-blog/',
-  output: 'static'
+  output: 'server'
 });
